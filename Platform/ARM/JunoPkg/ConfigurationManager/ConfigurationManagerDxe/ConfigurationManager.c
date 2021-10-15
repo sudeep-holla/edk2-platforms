@@ -26,6 +26,8 @@
 #include "ConfigurationManager.h"
 #include "Platform.h"
 
+extern struct EFI_ACPI_6_3_PLATFORM_COMMUNICATION_CHANNEL_TABLE Pcct;
+
 /** The platform configuration repository information.
 */
 STATIC
@@ -98,6 +100,13 @@ EDKII_PLATFORM_REPOSITORY_INFO ArmJunoPlatformRepositoryInfo = {
       CREATE_STD_ACPI_TABLE_GEN_ID (EStdAcpiTableIdSsdtCpuTopology),
       NULL,
       SIGNATURE_64 ('C','P','U','-','T','O','P','O')
+    },
+    // PCCT Table
+    {
+      EFI_ACPI_6_3_PLATFORM_COMMUNICATIONS_CHANNEL_TABLE_SIGNATURE,
+      EFI_ACPI_6_3_PLATFORM_COMMUNICATION_CHANNEL_TABLE_REVISION,
+      CREATE_STD_ACPI_TABLE_GEN_ID (EStdAcpiTableIdRaw),
+      (EFI_ACPI_DESCRIPTION_HEADER*)&Pcct
     },
     /* PCI MCFG Table
        PCIe is only available on Juno R1 and R2.

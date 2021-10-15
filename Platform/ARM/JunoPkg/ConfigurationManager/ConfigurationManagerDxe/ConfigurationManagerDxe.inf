@@ -24,11 +24,13 @@
   ConfigurationManager.c
   AslTables/Dsdt.asl
   AslTables/SsdtJunoUsb.asl
+  Pcct.c
 
 [Packages]
   ArmPkg/ArmPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
   DynamicTablesPkg/DynamicTablesPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   Platform/ARM/JunoPkg/ArmJuno.dec
