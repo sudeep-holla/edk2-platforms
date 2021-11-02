@@ -48,6 +48,12 @@ DEFINE NETWORK_HTTP_BOOT_ENABLE       = FALSE
 
 !include MdePkg/MdeLibs.dsc.inc
 
+[LibraryClasses]
+
+  PrmContextBufferLib|PrmPkg/Library/DxePrmContextBufferLib/DxePrmContextBufferLib.inf
+  PrmModuleDiscoveryLib|PrmPkg/Library/DxePrmModuleDiscoveryLib/DxePrmModuleDiscoveryLib.inf
+  PrmPeCoffLib|PrmPkg/Library/DxePrmPeCoffLib/DxePrmPeCoffLib.inf
+
 [LibraryClasses.common]
 !if $(TARGET) == RELEASE
   DebugLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
@@ -749,3 +755,33 @@ DEFINE NETWORK_HTTP_BOOT_ENABLE       = FALSE
   # ACPI Support
 !include Silicon/Qemu/SbsaQemu/Acpi.dsc.inc
   MdeModulePkg/Universal/Acpi/BootGraphicsResourceTableDxe/BootGraphicsResourceTableDxe.inf
+
+  #
+  # PRM Configuration Driver
+  #
+  PrmPkg/PrmConfigDxe/PrmConfigDxe.inf {
+    <LibraryClasses>
+      NULL|PrmPkg/Samples/PrmSampleAcpiParameterBufferModule/Library/DxeAcpiParameterBufferModuleConfigLib/DxeAcpiParameterBufferModuleConfigLib.inf
+      NULL|PrmPkg/Samples/PrmSampleContextBufferModule/Library/DxeContextBufferModuleConfigLib/DxeContextBufferModuleConfigLib.inf
+  }
+
+  #
+  # PRM Module Loader Driver
+  #
+  PrmPkg/PrmLoaderDxe/PrmLoaderDxe.inf
+
+  #
+  # PRM SSDT Installation Driver
+  #
+  PrmPkg/PrmSsdtInstallDxe/PrmSsdtInstallDxe.inf
+
+  #
+  # PRM Sample Modules
+  #
+  PrmPkg/Samples/PrmSampleAcpiParameterBufferModule/PrmSampleAcpiParameterBufferModule.inf
+  PrmPkg/Samples/PrmSampleContextBufferModule/PrmSampleContextBufferModule.inf
+
+  #
+  # PRM Information UEFI Application
+  #
+  PrmPkg/Application/PrmInfo/PrmInfo.inf
