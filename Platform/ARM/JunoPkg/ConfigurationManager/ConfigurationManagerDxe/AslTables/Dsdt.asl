@@ -34,6 +34,31 @@ DefinitionBlock("DsdtTable.aml", "DSDT", 2, "ARMLTD", "ARM-JUNO", EFI_ACPI_ARM_O
       Return (Arg3)
     }
 
+    OperationRegion(FFHR, FFixedHW, 0, 32)
+    Field(FFHR, BufferAcc, NoLock, Preserve)
+    {
+      SMCC, 0x100 // 8 * 4 = 32 bytes
+    }
+
+    Method(PS03)
+    {
+      Name(BUFF, Buffer(20){})
+      CreateDWordField(BUFF, 0x00, BFW0) // W0 (FID)
+      CreateDWordField(BUFF, 0x04, BFW1) // W1
+      CreateDWordField(BUFF, 0x8, BFW2) // W2
+      CreateDWordField(BUFF, 0xC, BFW3) // W3
+      CreateDWordField(BUFF, 0x10, BFW4) // W4
+
+      BFW0 = 0x8400006F
+      BFW1 = 0xc001
+      BFW2 = 0x80000000
+      BFW3 = 0x4D2
+      BFW4 = 0x123
+
+      BUFF = (SMCC = BUFF)
+      Return(BFW0)
+    }
+
     //
     // LAN9118 Ethernet
     //
@@ -53,6 +78,13 @@ DefinitionBlock("DsdtTable.aml", "DSDT", 2, "ARMLTD", "ARM-JUNO", EFI_ACPI_ARM_O
                                Package(2) {"smsc,irq-push-pull",1}
                       }
       }) // _DSD()
+      Method (_PS0, 0, Serialized) {
+        PS03()
+      }
+      Method (_PS3, 0, Serialized) {
+        PS03()
+      }
+
     }
   } // Scope(_SB)
 }
