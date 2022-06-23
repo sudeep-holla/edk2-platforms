@@ -67,6 +67,27 @@ READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 FvNameGuid         = 87940482-fc81-41c3-87e6-399cf85ac8a0
 
+  #
+  # PRM Configuration Driver
+  #
+  INF PrmPkg/PrmConfigDxe/PrmConfigDxe.inf
+
+  #
+  # PRM Sample Modules
+  #
+  INF PrmPkg/Samples/PrmSampleAcpiParameterBufferModule/PrmSampleAcpiParameterBufferModule.inf
+  INF PrmPkg/Samples/PrmSampleContextBufferModule/PrmSampleContextBufferModule.inf
+
+  #
+  # PRM Module Loader Driver
+  #
+  INF PrmPkg/PrmLoaderDxe/PrmLoaderDxe.inf
+
+  #
+  # PRM SSDT Installation Driver
+  #
+  INF PrmPkg/PrmSsdtInstallDxe/PrmSsdtInstallDxe.inf
+
   INF MdeModulePkg/Core/Dxe/DxeMain.inf
   INF MdeModulePkg/Universal/PCD/Dxe/Pcd.inf
 

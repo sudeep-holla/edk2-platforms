@@ -46,6 +46,12 @@
 !include Platform/ARM/VExpressPkg/ArmVExpress.dsc.inc
 !include DynamicTablesPkg/DynamicTables.dsc.inc
 
+[LibraryClasses]
+
+PrmContextBufferLib|PrmPkg/Library/DxePrmContextBufferLib/DxePrmContextBufferLib.inf
+PrmModuleDiscoveryLib|PrmPkg/Library/DxePrmModuleDiscoveryLib/DxePrmModuleDiscoveryLib.inf
+PrmPeCoffLib|PrmPkg/Library/DxePrmPeCoffLib/DxePrmPeCoffLib.inf
+
 [LibraryClasses.common]
   ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
   ArmPlatformLib|Platform/ARM/VExpressPkg/Library/ArmVExpressLibRTSM/ArmVExpressLib.inf
@@ -443,3 +449,33 @@
       NULL|StandaloneMmPkg/Library/VariableMmDependency/VariableMmDependency.inf
   }
 !endif
+
+  #
+  # PRM Configuration Driver
+  #
+  PrmPkg/PrmConfigDxe/PrmConfigDxe.inf {
+    <LibraryClasses>
+      NULL|PrmPkg/Samples/PrmSampleAcpiParameterBufferModule/Library/DxeAcpiParameterBufferModuleConfigLib/DxeAcpiParameterBufferModuleConfigLib.inf
+      NULL|PrmPkg/Samples/PrmSampleContextBufferModule/Library/DxeContextBufferModuleConfigLib/DxeContextBufferModuleConfigLib.inf
+  }
+
+  #
+  # PRM Module Loader Driver
+  #
+  PrmPkg/PrmLoaderDxe/PrmLoaderDxe.inf
+
+  #
+  # PRM SSDT Installation Driver
+  #
+  PrmPkg/PrmSsdtInstallDxe/PrmSsdtInstallDxe.inf
+
+  #
+  # PRM Sample Modules
+  #
+  PrmPkg/Samples/PrmSampleAcpiParameterBufferModule/PrmSampleAcpiParameterBufferModule.inf
+  PrmPkg/Samples/PrmSampleContextBufferModule/PrmSampleContextBufferModule.inf
+
+  #
+  # PRM Information UEFI Application
+  #
+  PrmPkg/Application/PrmInfo/PrmInfo.inf
