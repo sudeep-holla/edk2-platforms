@@ -95,8 +95,8 @@ EDKII_PLATFORM_REPOSITORY_INFO ArmJunoPlatformRepositoryInfo = {
     {
       EFI_ACPI_6_3_SECONDARY_SYSTEM_DESCRIPTION_TABLE_SIGNATURE,
       0, // Unused
-      CREATE_STD_ACPI_TABLE_GEN_ID (EStdAcpiTableIdSsdtCpuTopology),
-      NULL,
+      CREATE_STD_ACPI_TABLE_GEN_ID (EStdAcpiTableIdSsdt),
+      (EFI_ACPI_DESCRIPTION_HEADER*)ssdtcputopo_aml_code,
       SIGNATURE_64 ('C','P','U','-','T','O','P','O')
     },
     /* PCI MCFG Table
