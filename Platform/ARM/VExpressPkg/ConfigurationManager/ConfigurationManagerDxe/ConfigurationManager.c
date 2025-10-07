@@ -33,6 +33,8 @@
 STATIC EFI_HII_HANDLE  mHiiHandle;
 extern UINT8           ConfigurationManagerDxeStrings[];
 
+extern struct EFI_ACPI_6_3_PLATFORM_COMMUNICATION_CHANNEL_TABLE Pcct;
+
 /** The platform configuration repository information.
 */
 STATIC
@@ -120,6 +122,13 @@ EDKII_PLATFORM_REPOSITORY_INFO  VExpressPlatRepositoryInfo = {
       CREATE_STD_ACPI_TABLE_GEN_ID (EStdAcpiTableIdSsdtPciExpress),
       NULL,
       SIGNATURE_64 ('S', 'S', 'D', 'T', '-', 'P', 'C', 'I')
+    },
+    // PCCT Table
+    {
+      EFI_ACPI_6_3_PLATFORM_COMMUNICATIONS_CHANNEL_TABLE_SIGNATURE,
+      EFI_ACPI_6_3_PLATFORM_COMMUNICATION_CHANNEL_TABLE_REVISION,
+      CREATE_STD_ACPI_TABLE_GEN_ID (EStdAcpiTableIdRaw),
+      (EFI_ACPI_DESCRIPTION_HEADER*)&Pcct
     },
   },
 

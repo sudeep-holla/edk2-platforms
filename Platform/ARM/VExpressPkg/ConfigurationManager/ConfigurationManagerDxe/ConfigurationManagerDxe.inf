@@ -24,11 +24,13 @@
   ConfigurationManager.c
   ConfigurationManager.uni
   AslTables/Dsdt.asl
+  Pcct.c
 
 [Packages]
   ArmPkg/ArmPkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
   DynamicTablesPkg/DynamicTablesPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   Platform/ARM/VExpressPkg/ArmVExpressPkg.dec
