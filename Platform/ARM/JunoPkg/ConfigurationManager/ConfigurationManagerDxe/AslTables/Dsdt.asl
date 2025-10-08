@@ -34,6 +34,23 @@ DefinitionBlock("DsdtTable.aml", "DSDT", 2, "ARMLTD", "ARM-JUNO", EFI_ACPI_ARM_O
       Return (Arg3)
     }
 
+    OperationRegion (PFRM, PCC, 0x00, 0x74)
+    Field(PFRM, ByteAcc, NoLock, Preserve) {
+      SIGN, 32, // Signature field
+      FLGS, 32, // Command Flags field
+      LEN, 32, // Length field
+      CMD, 32, // Command field
+      DATA, 0x320 // Communication space of size 100 bytes
+    }
+
+    Method (_REG, 2) { // Check if OS Op region handler is available
+    /*
+     * Check if Arg0.Byte0 = 0xA, PCC Operation Region Supported?
+     * Check if Arg0.Byte1 = 0x3, subchannel type 3 as defined in Table 14-357
+     * Disallow further processing until support for Type 3 becomes available
+     */
+    }
+
     //
     // LAN9118 Ethernet
     //
@@ -53,6 +70,46 @@ DefinitionBlock("DsdtTable.aml", "DSDT", 2, "ARMLTD", "ARM-JUNO", EFI_ACPI_ARM_O
                                Package(2) {"smsc,irq-push-pull",1}
                       }
       }) // _DSD()
+      Method (_PS0, 0, Serialized)
+      {
+        Name(BUFF, Buffer(12) {})
+	CreateDWordField(BUFF, 0, WD0)
+	CreateDWordField(BUFF, 4, WD1)
+	CreateDWordField(BUFF, 8, WD2)
+
+	WD0 = 0x50434300
+	SIGN = BUFF
+	WD0 = 0x1
+	FLGS = BUFF
+	WD0 = 0x10
+	LEN = BUFF
+	WD0 = 0x0
+	WD1 = 0x8
+	WD2 = 0x0
+	DATA = BUFF
+	WD0 = 0x4404
+	CMD = BUFF
+      }
+      Method (_PS3, 0, Serialized)
+      {
+        Name(BUFF, Buffer(12) {})
+	CreateDWordField(BUFF, 0, WD0)
+	CreateDWordField(BUFF, 4, WD1)
+	CreateDWordField(BUFF, 8, WD2)
+
+	WD0 = 0x50434300
+	SIGN = BUFF
+	WD0 = 0x1
+	FLGS = BUFF
+	WD0 = 0x10
+	LEN = BUFF
+	WD0 = 0x0
+	WD1 = 0x8
+	WD2 = 0x0
+	DATA = BUFF
+	WD0 = 0x4404
+	CMD = BUFF
+      }
     }
   } // Scope(_SB)
 }
