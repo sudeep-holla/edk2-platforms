@@ -18,7 +18,6 @@
 */
 extern CHAR8  dsdt_aml_code[];
 extern CHAR8  ssdtjunousb_aml_code[];
-extern CHAR8  ssdtcputopo_aml_code[];
 extern CHAR8  ssdtpci_aml_code[];
 
 /** The configuration manager version
